@@ -1,22 +1,10 @@
 import React from "react"
-// import { useState } from "react"
 
-/*
-React.useState("Yes") : 
-    The current state value
-    A function that lets you update that value
 
-The array destructuring
-    const [a, b] = [1, 2];
-    means “assign a = 1 and b = 2”.
 
-const [result, func] = React.useState("Yes");
-    result will contain the current state value, initially "Yes".
-    func will be the function to update that value.
- */
 
 export default function Form() {
-    const ingredients =['potato','tomato','komako']
+    const [ingredients,setIngredients] = React.useState(['chiken','potato'])
 
     //afficher la liste dans un JSX elements : 
     const ingredientsListItems = ingredients.map(ingredient => {
@@ -26,23 +14,38 @@ export default function Form() {
             </li>
         )
     })
-     
-    function handelsubmit(event){
-        event.preventDefault()
-        //getting the data from the form
-        //new instance from FormData object
-        const formDataa = new FormData(event.currentTarget)
-        //getting the data : 
-        const newIngredient = formDataa.get("ingredient")
-        console.log(newIngredient)
-        //adding the new ingredient to the array 
-        ingredients.push(newIngredient)
-        console.log(ingredients)
+
+
+    //We use this fucntion if we want to use onSubmit={handelsubmit} in the form
+        // function handelsubmit(event){
+        //     event.preventDefault()
+        //     //getting the data from the form and update the state : 
+
+        //     //new instance from FormData object
+        //     const formDataa = new FormData(event.currentTarget)
+
+        //     //getting the data : 
+        //     const newIngredient = formDataa.get("ingredient") // get the data from the input that have the name 'ingredient'
+          
+        //     //update the new Array : 
+        //     setIngredients(prevIngredients => [...prevIngredients,newIngredient])
+
+        // }
+
+    //we use this function when we want to use action={}
+    function actionSubmit(formData){
+
+      const newIngredient = formData.get("ingredient")
+      setIngredients(prevIngredients => [...prevIngredients,newIngredient])
+      console.log(Object.fromEntries(formData))
+
+
     }
 
   return (
     <main>
-      <form onSubmit={handelsubmit} className="add-ingredient-form" >
+      {/* <form onSubmit={handelsubmit} className="add-ingredient-form" > */}
+      <form action={actionSubmit} className="add-ingredient-form" >
         <input
           type="text"
           placeholder="e.g egg"
@@ -50,7 +53,7 @@ export default function Form() {
           name ="ingredient"
         />
         <button >+ Add ingredient</button>
-       
+
       </form>
 
       <h2>List of Ingredients</h2>  

@@ -80,7 +80,7 @@ Before click	  prevFavThing.length	    Added item	                              
 
 ["potato"]	            1	                allFavoriteThings[1] = "tomate"	                  ["potato", "tomate"]
 
-["potato", "tomate"]	2	                allFavoriteThings[2] = "pineapple"	              ["potato", "tomate", "pineapple"]
+["potato", "tomate"]	2	                allFavoriteThings[2] = "pineapple"	               ["potato", "tomate", "pineapple"]
 
 ------------------------------------------------------------------------------------------------------------
 
